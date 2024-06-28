@@ -1,0 +1,59 @@
+
+# services:
+#  db:
+#   image: mysql:8.0
+#   restart: always
+#   environment:
+#       - MYSQL_DATABASE=finaldb
+#       - MYSQL_ROOT_PASSWORD=hatienphuvt321
+#   ports:
+#       - '3308:3306'
+
+# Use postgres/example user/password credentials
+version: '3.8'
+services:
+    mysql:
+        image: mysql:8.0
+        restart: unless-stopped
+        environment:
+            - MYSQL_DATABASE=finaldb
+            - MYSQL_ROOT_PASSWORD=teste
+        volumes:
+            - ./mysqldata:/var/lib/mysql
+        ports:
+            - '3309:3306'
+    postgres:
+        image: postgres:15
+        restart: unless-stopped
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=password
+        volumes:
+            - postgres-db-volume:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+        networks:
+            - postgres-db-network
+    pgadmin:
+        image: dpage/pgadmin4
+        restart: unless-stopped
+        environment:
+            PGADMIN_DEFAULT_EMAIL: 'teste@teste.com'
+            PGADMIN_DEFAULT_PASSWORD: 'teste'
+        ports:
+            - 16543:80
+        volumes:
+            - ./servers.json:/pgadmin4/servers.json
+        networks:
+            - postgres-db-network
+
+volumes:
+    postgres-db-volume:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: ./data
+networks:
+    postgres-db-network:
+        driver: bridge
