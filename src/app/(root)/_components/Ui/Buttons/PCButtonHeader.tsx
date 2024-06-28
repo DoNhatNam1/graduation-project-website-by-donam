@@ -35,7 +35,7 @@ export function PCButtonHeaderLogin() {
       } else {
         // router.push(`http://${inputValue}.webweldingstore.vercel.app`)
         Cookies.set('agencyDomain', inputValue)
-        router.push(`http://localhost:3000/login`)
+        router.push(`/login`)
         toast.success("Submit success, go to login!")
         onClose()
       }
