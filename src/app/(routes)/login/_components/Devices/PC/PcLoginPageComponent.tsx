@@ -2,16 +2,23 @@
 
 import { cookies } from "next/headers"
 import LoginForm from "../../Ui/Forms/LoginForm"
-import { useRouter } from 'next/router';
 import { URL } from 'url';
 
+async function GetPath() {
+  'use server'
+
+  const response = await fetch('/api/handler');
+  const data = await response.json();
+
+  return data.domainValue;
+}
+
 export default async function PcLoginPageComponent() {
-  const cookieStore = cookies()
-  const path = cookieStore.get('agencyDomain')!.value
-  const router = useRouter();
+  // const cookieStore = cookies()
+  // const path = cookieStore.get('agencyDomain')!.value
 
   // Lấy URL từ router
-  const currentUrl = router.asPath;
+  const currentUrl = await GetPath();
 
   // Phân tích URL để lấy hostname
   const parsedUrl = new URL(currentUrl);
