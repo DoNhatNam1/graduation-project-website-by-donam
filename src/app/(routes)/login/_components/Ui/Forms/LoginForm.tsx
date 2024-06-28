@@ -13,7 +13,7 @@ type Props = {
   onLogin: (data: LoginFormInputs) => void;
 };
 
-const LoginForm = () => {
+const LoginForm = ({domainValue} : {domainValue: string}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInputs>();
 
   const onSubmit = async (data: LoginFormInputs) => {
@@ -21,7 +21,7 @@ const LoginForm = () => {
     if(!validate) {
         toast.error("Sai tài khoản hoặc mật khẩu, vui lòng thử lại")
     } else {
-        toast.success("Đăng nhập thành công")
+        toast.success(`Đăng nhập thành công với quán ${domainValue}}`)
     }
   };
 
