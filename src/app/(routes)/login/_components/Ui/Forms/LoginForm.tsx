@@ -10,30 +10,27 @@ type LoginFormInputs = {
   password: string;
 };
 
-type Props = {
-  onLogin: (data: LoginFormInputs) => void;
-};
-
-const LoginForm = ({domainValue} : {domainValue: string}) => {
+const LoginForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInputs>();
   const { asPath } = useRouter();
 
+
+
   const onSubmit = async (data: LoginFormInputs) => {
     const validate = await ValidateLoginForm(data)
+      const origin =
+      typeof window !== 'undefined' && window.location.origin
+          ? window.location.origin
+          : '';
+    
+    const URL = `${origin}${asPath}`;
+    console.log(URL);
     if(!validate) {
         toast.error("Sai tài khoản hoặc mật khẩu, vui lòng thử lại")
     } else {
-        toast.success(`Đăng nhập thành công với quán ${domainValue}}`)
+        toast.success(`Đăng nhập thành công với quán ${URL}}`)
     }
   };
-
-    const origin =
-          typeof window !== 'undefined' && window.location.origin
-              ? window.location.origin
-              : '';
-
-      const URL = `${origin}${asPath}`;
-      console.log(URL);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
