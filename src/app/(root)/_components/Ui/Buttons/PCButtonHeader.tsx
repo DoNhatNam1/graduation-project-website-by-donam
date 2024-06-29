@@ -33,9 +33,9 @@ export function PCButtonHeaderLogin() {
       if (inputValue == "") {
         toast.error("Vui lòng nhập đường link liên kết của bạn")
       } else {
-        router.push(`http://${inputValue}.webweldingstore.vercel.app`)
+        router.push(`http://${inputValue}.webweldingstores.vercel.app/login`)
         // Cookies.set('agencyDomain', inputValue)
-        router.push(`/login`)
+        // router.push(`/login`)
         toast.success("Submit success, go to login!")
         onClose()
       }
