@@ -3,7 +3,7 @@
 import ValidateLoginForm from '@/src/Actions/POST/ValidateLoginForm';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-
+import { useEffect, useState } from 'react';
 
 type LoginFormInputs = {
   username: string;
@@ -13,15 +13,14 @@ type LoginFormInputs = {
 const LoginForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInputs>();
 
-
-
   const onSubmit = async (data: LoginFormInputs) => {
     const validate = await ValidateLoginForm(data)
-
+    
     if(!validate) {
         toast.error("Sai tài khoản hoặc mật khẩu, vui lòng thử lại")
     } else {
-        toast.success(`Đăng nhập thành công với quán ${URL}}`)
+      const hostnamefetch = window.location.hostname;
+        toast.success(`Đăng nhập thành công với quán ${hostnamefetch}}`)
     }
   };
 
