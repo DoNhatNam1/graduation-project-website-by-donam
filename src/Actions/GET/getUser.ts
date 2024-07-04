@@ -4,7 +4,7 @@ import prisma from '../../libs/prismaDb'
 const getUserData = async () => {
     try {
       // Sử dụng Prisma Client để truy vấn tất cả dữ liệu từ bảng User
-      const users = await prisma.tbUser.findMany();
+      const users = await prisma.tbAgencyAccount.findMany();
   
       // Trả về dữ liệu của người dùng
       return users;

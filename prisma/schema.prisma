@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["tracing"]
+  provider        = "prisma-client-js"
 }
 
 datasource db {
@@ -8,40 +7,73 @@ datasource db {
   // provider = "mysql"
 
   // Uses connection pooling
-  // url = env("POSTGRES_PRISMA_URL")
-  // url = env("POSTGRES_PRISMA_URL_DEV")
-  url = env("DATABASE_URL")
+  url = env("POSTGRES_PRISMA_URL_DEV")
+  // url       = env("DATABASE_URL")
   // url = env("MYSQL_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NON_POOLING")
+  // directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 // Script terminal //
 // dotenv -e .env.local -- bunx prisma db push
 // dotenv -e .env.local -- bunx prisma studio
 
-model TbAgencyURL {
-  id      String   @id @default(uuid())
-  urlhost String
-  User    TbUser[]
+model TbAdmin {
+  id           String        @id @default(uuid())
+  password     String        @db.VarChar(255)
+  name         String        @db.VarChar(30)
+  phone_number Float?
+  address      String?       @db.VarChar(50)
+  urlhost      String        @unique @db.VarChar(255)
+  email        String        @unique
+  image        String        @db.Text
+  role         Account_Roles @default(Admin)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([email, password], name: "index_validation_admin_login_email_password")
+  @@index([id], type: Hash, name: "index_get_Adminid")
 }
 
-model TbUser {
-  id          String   @id @default(uuid())
-  AgencyURLId String
-  username    String
-  password    String
-  name        String
-  email       String   @unique
-  image       String
-  createdAt   DateTime @default(now())
+model TbAgencyAccount {
+  id           String         @id @default(uuid())
+  password     String         @db.VarChar(255)
+  name         String?        @db.VarChar(30)
+  phone_number Float?
+  address      String?        @db.VarChar(50)
+  role         Account_Roles  @default(Agency)
+  urlhost      String         @unique @db.VarChar(255)
+  email        String         @unique @db.VarChar(255)
+  image        String?        @db.Text
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  SubAccount   TbSubAccount[]
 
-  AgencyURL TbAgencyURL @relation(fields: [AgencyURLId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_agencyurlid_foreign_key_idx")
-
-  @@index([AgencyURLId], map: "AgencyURLId")
-  @@index([username, password], name: "index_validation_login_username_password")
+  @@index([email, password], name: "index_validation_agency_login_email_password")
+  @@index([id], type: Hash, name: "index_get_Agencyid")
 }
 
-model TbPost {
-  id       String @id @default(uuid())
-  PostName String
+model TbSubAccount {
+  id            String          @id @default(uuid())
+  AgencyId      String
+  password      String          @db.VarChar(255)
+  phone_number  Float?
+  address       String?         @db.VarChar(50)
+  name          String?         @db.VarChar(30)
+  urlhost      String           @db.VarChar(255)
+  email         String          @unique
+  image         String?         @db.Text
+  role          Account_Roles   @default(SubAccount)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  AgencyAccount TbAgencyAccount @relation(fields: [AgencyId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "subaccount_agencyid_foreign_key_idx")
+
+  @@index([email, password], name: "index_validation_login_subaccount_email_password")
+  @@index([id], type: Hash, name: "index_get_SubAccountId")
+  @@index([AgencyId], map: "AgencyId")
+}
+
+enum Account_Roles {
+  Admin
+  Agency
+  SubAccount
 }

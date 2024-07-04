@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input} from "@nextui-org/react";
 import { DomainIcon } from "../Icons/DomainIcon";
 import toast from "react-hot-toast";
-import Cookies from 'js-cookie'
+
+
 
 export function PCButtonHeaderSignup() {
     const router = useRouter()
@@ -26,16 +27,16 @@ export function PCButtonHeaderLogin() {
     const [inputValue, setInputValue] = useState("")
 
     const handleSubmit = () => {
-      const checkCookie = Cookies.get('agencyDomain')
-      if(checkCookie){
-        Cookies.remove('agencyDomain')
-      }
       if (inputValue == "") {
         toast.error("Vui lòng nhập đường link liên kết của bạn")
       } else {
-        router.push(`http://${inputValue}.webweldingstores.vercel.app/login`)
+        
         // Cookies.set('agencyDomain', inputValue)
-        // router.push(`/login`)
+        if(process.env.NODE_ENV === "development"){
+          router.push(`/login`)
+        } else if(process.env.NODE_ENV === "production"){
+          router.push(`http://${inputValue}.webweldingstores.vercel.app/login`)
+        }
         toast.success("Submit success, go to login!")
         onClose()
       }
