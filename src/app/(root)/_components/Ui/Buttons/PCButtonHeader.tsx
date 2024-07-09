@@ -30,7 +30,7 @@ export function PCButtonHeaderLogin() {
       if (inputValue == "") {
         toast.error("Vui lòng nhập đường link liên kết của bạn")
       } else {
-        router.push(`http://${inputValue}.${process.env.HOST_NAME}/login`)
+        router.push(`http://${inputValue}.${process.env.NEXT_PUBLIC_HOSTNAME_PATH}/login`)
         toast.success("Heading to login page!")
         onClose()
       }
