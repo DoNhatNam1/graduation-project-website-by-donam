@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Poppins, Roboto } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers/NextUiProvider";
 import { Toaster } from "react-hot-toast";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
-const poppins = Poppins({
+const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-Poppins",
+  weight: ["400", "500", "700", "900"],
+  variable: "--font-Roboto",
 });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} ${inter.variable}`}>
+      <body className={`${roboto.variable} ${inter.variable}`}>
         <Providers>{children}</Providers>
         <Toaster position="top-center" reverseOrder={false} />
         <SpeedInsights />

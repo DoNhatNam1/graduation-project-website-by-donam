@@ -12,11 +12,11 @@ export function PCButtonHeaderSignup() {
     const router = useRouter()
   return (
     <>
-      <button
+      <Button
       onClick={() => router.push('/signup')}
-       className="justify-center px-5 py-2.5 bg-blue-600 rounded-xl">
+       className="justify-center text-white font-bold px-5 py-2.5 bg-blue-600 rounded-xl">
         Đăng ký
-      </button>
+      </Button>
     </>
   );
 }
@@ -30,17 +30,10 @@ export function PCButtonHeaderLogin() {
       if (inputValue == "") {
         toast.error("Vui lòng nhập đường link liên kết của bạn")
       } else {
-        
-        // Cookies.set('agencyDomain', inputValue)
-        if(process.env.NODE_ENV === "development"){
-          router.push(`/login`)
-        } else if(process.env.NODE_ENV === "production"){
-          router.push(`http://${inputValue}.webweldingstores.vercel.app/login`)
-        }
-        toast.success("Submit success, go to login!")
+        router.push(`http://${inputValue}.${process.env.HOST_NAME}/login`)
+        toast.success("Heading to login page!")
         onClose()
       }
-
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +54,7 @@ export function PCButtonHeaderLogin() {
         placement="top-center"
       >
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
               <ModalHeader className="flex flex-col gap-1 font-bold text-lg">Đăng nhập tài khoản WeldingStore</ModalHeader>
               <ModalBody>

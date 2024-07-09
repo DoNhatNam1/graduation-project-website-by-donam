@@ -9,7 +9,7 @@ export default function PCHeader() {
   return (
     <header className="flex gap-0 justify-between px-8 py-2.5 bg-slate-900 max-md:flex-wrap max-md:px-5">
       <div className="flex justify-center items-center my-auto">
-      <Image alt="Replace with an informative alt text" sizes="100w, 200w, 400w, 800w, 1200w, 1600w, 2000w"
+      <Image alt="Welding Store Logo" sizes="100w, 200w, 400w, 800w, 1200w, 1600w, 2000w"
               loading="lazy"
               src={img_62dc94148b7b7840975538f8ad040a8d0ec998758d0c9246d302915a36c0c626}
               className="aspect-[0.82] w-[50px]"

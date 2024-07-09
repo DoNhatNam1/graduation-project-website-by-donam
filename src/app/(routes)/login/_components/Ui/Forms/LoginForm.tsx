@@ -42,7 +42,7 @@ const LoginForm = () => {
       const role = splitHostName === "admin" ? "Admin" : selectedRole as AccountType['role'];
   
       const userData = {
-        email: data.email,
+        phone_number: data.phone_number,
         password: data.password,
         role: role,
       };
@@ -65,14 +65,14 @@ const LoginForm = () => {
             Email
           </label>
           <input
-            {...register("email")}
-            type="email"
+            {...register("phone_number")}
+            type="tel"
             className="justify-center items-start p-2.5 border-b border-solid border-slate-50 text-slate-50 max-md:pr-5 bg-transparent"
-            placeholder="Nhập Email"
+            placeholder="Nhập tài khoản"
           />
-          {errors.email && (
+          {errors.phone_number && (
             <span className="text-red-500 block mt-1">
-              {`${errors.email.message}`}
+              {`${errors.phone_number.message}`}
             </span>
           )}
           <label htmlFor="password" className="sr-only">

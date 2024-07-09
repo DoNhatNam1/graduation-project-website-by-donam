@@ -3,6 +3,6 @@
 import { z } from "zod";
 
 export const formSchemaLogin = z.object({
-  email: z.string().email(),
-  password: z.string().min(1, "Mật khẩu không được bỏ trống!"),
+  phone_number: z.number().min(1, "Username require!"),
+  password: z.string().min(1, "Password require!"),
 });

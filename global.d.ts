@@ -4,4 +4,8 @@ declare global{
     namespace globalThis{
         var prismadb: PrismaClient;
     }
+        interface Window {
+            confirmationResult:any;
+            recaptchaVerifier:any;
+        }
 }

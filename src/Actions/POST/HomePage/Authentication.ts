@@ -2,13 +2,13 @@
 
 import prisma from "@/src/libs/prismaDb";
 import { AccountType } from "@/src/types/login";
+import { SignupType } from "@/src/types/signup";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
-let environment = process.env.NODE_ENV;
-let path = process.env.HOSTNAME_PATH;
+let path = process.env.NEXT_PUBLIC_HOSTNAME_PATH;
 let secretKey = process.env.SECRET_KEY;
 let key = new TextEncoder().encode(String(secretKey));
 
@@ -34,7 +34,7 @@ export async function login(InputData: AccountType, splitHostName: string) {
     case "Admin":
       user = await prisma.tbAdmin.findFirst({
         where: {
-          email: InputData.email,
+          phone_number: InputData.phone_number,
           password: InputData.password,
         },
       });
@@ -43,7 +43,7 @@ export async function login(InputData: AccountType, splitHostName: string) {
     case "Agency":
       user = await prisma.tbAgencyAccount.findFirst({
         where: {
-          email: InputData.email,
+          phone_number: InputData.phone_number,
           password: InputData.password,
         },
       });
@@ -52,7 +52,7 @@ export async function login(InputData: AccountType, splitHostName: string) {
     case "SubAccount":
       user = await prisma.tbSubAccount.findFirst({
         where: {
-          email: InputData.email,
+          phone_number: InputData.phone_number,
           password: InputData.password,
         },
       });
@@ -62,10 +62,7 @@ export async function login(InputData: AccountType, splitHostName: string) {
       break;
   }
 
-  if (
-    !user ||
-    (environment === "production" && user.urlhost !== splitHostName)
-  ) {
+  if (!user || user.urlhost !== splitHostName) {
     throw new Error("Sai thông tin đăng nhập, vui lòng thử lại!");
   }
 
@@ -74,22 +71,42 @@ export async function login(InputData: AccountType, splitHostName: string) {
 
   cookies().set("session", session, { expires, httpOnly: true });
 
-  redirect(
-    environment === "development"
-      ? `/dashboard`
-      : `http://${user.urlhost}.${path}/dashboard`
-  );
+  redirect(`http://${splitHostName}.${path}/dashboard`);
 }
+
+export async function checkSignUpData(InputData: SignupType){
+  const query = await prisma.tbAgencyAccount.findUnique({
+    where: {
+      phone_number: InputData.phone_number,
+    }
+  });
+
+  if(query){
+    throw new Error("Số điện thoại này đã có tài khoản tồn tại!");
+  }
+
+  if (cookies().get("inputData")) {
+    cookies().delete("inputData");
+  }
+
+  cookies().set({
+    name: 'inputData',
+    value: JSON.stringify(InputData),
+    httpOnly: true,
+    path: '/signup/choose-bussiness',
+  })
+  
+}
+
+// export async function signup(InputData: SignupType){
+
+// }
 
 export async function logout() {
   // Destroy the session
   cookies().set("session", "", { expires: new Date(0) });
 
-  if ((environment = "development")) {
-    redirect(`/`);
-  } else if ((environment = "production")) {
-    redirect(`http://${path}`);
-  }
+  redirect(`http://${path}`);
 }
 
 export async function getSession() {

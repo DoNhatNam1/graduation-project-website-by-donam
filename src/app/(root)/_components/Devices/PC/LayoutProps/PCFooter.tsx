@@ -1,13 +1,13 @@
 
 import Image from 'next/image'
 import footerlogo from '@/public/footerbackground.png'
-import img_assets2Fe454d901b26c4ee0bac5b3f0f055fadf2Fee2ff5d9a69f4cf9893c537a0755aed6 from '@/public/assets2Fe454d901b26c4ee0bac5b3f0f055fadf2Fee2ff5d9a69f4cf9893c537a0755aed6.jpg';
+import img_assets2Fe454d901b26c4ee0bac5b3f0f055fadf2Fee2ff5d9a69f4cf9893c537a0755aed6 from '@/public/assets2Fe454d901b26c4ee0bac5b3f0f055fadf2Fee2ff5d9a69f4cf9893c537a0755aed6.png';
 import img_c468c0cdbb26d7d78e34e3e3f3864fbf0e9a34342a648d0a4d2b602dd3fcc5eb from '@/public/c468c0cdbb26d7d78e34e3e3f3864fbf0e9a34342a648d0a4d2b602dd3fcc5eb.png';
 
 export default function PCFooter() {
   return (
         <footer className="flex overflow-hidden relative flex-col justify-center items-center px-16 py-20 mt-16 w-full min-h-[587px] max-md:px-5 max-md:mt-10 max-md:max-w-full">
-          <Image alt="Replace with an informative alt text" sizes="100w, 200w, 400w, 800w, 1200w, 1600w, 2000w"
+          <Image alt="Footer Background" sizes="100w, 200w, 400w, 800w, 1200w, 1600w, 2000w"
             loading="lazy"
             src={img_assets2Fe454d901b26c4ee0bac5b3f0f055fadf2Fee2ff5d9a69f4cf9893c537a0755aed6}
             className="object-cover absolute inset-0 size-full"
@@ -79,7 +79,7 @@ export default function PCFooter() {
                       <span className="flex-1 justify-center text-sm font-bold text-center text-slate-50">
                         Send
                       </span>
-                      <Image alt="Replace with an informative alt text"
+                      <Image alt="Send Icon"
                           loading="lazy"
                           src={img_c468c0cdbb26d7d78e34e3e3f3864fbf0e9a34342a648d0a4d2b602dd3fcc5eb}
                           className="w-5 aspect-square"

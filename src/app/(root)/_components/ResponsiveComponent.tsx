@@ -1,21 +1,23 @@
 "use client";
 
 import MediaQuery from "react-responsive";
-import LaptopHomePageComponent from "./Devices/Laptop/LaptopHomePageComponent";
-import IpadHomePageComponent from "./Devices/Ipad/IpadHomePageComponent";
 
 const ResponsiveComponent = ({
   PcHomePageComponent,
+  LaptopHomePageComponent,
+  IpadHomePageComponent,
 }: {
   PcHomePageComponent: React.ReactNode;
+  LaptopHomePageComponent: React.ReactNode;
+  IpadHomePageComponent: React.ReactNode;
 }) => {
   return (
     <>
       <MediaQuery maxWidth={770}>
-        <IpadHomePageComponent />
+        {PcHomePageComponent}
       </MediaQuery>
       <MediaQuery minWidth={771} maxWidth={1455}>
-        <LaptopHomePageComponent />
+        {PcHomePageComponent}
       </MediaQuery>
       <MediaQuery minWidth={1456}>
         {PcHomePageComponent}

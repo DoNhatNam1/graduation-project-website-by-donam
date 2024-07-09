@@ -6,25 +6,22 @@ datasource db {
   provider = "postgresql"
   // provider = "mysql"
 
-  // Uses connection pooling
-  url = env("POSTGRES_PRISMA_URL_DEV")
-  // url       = env("DATABASE_URL")
+  url = env("POSTGRES_PRISMA_URL")
   // url = env("MYSQL_PRISMA_URL")
-  // directUrl = env("POSTGRES_URL_NON_POOLING")
+
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-// Script terminal //
 // dotenv -e .env.local -- bunx prisma db push
-// dotenv -e .env.local -- bunx prisma studio
 
 model TbAdmin {
   id           String        @id @default(uuid())
   password     String        @db.VarChar(255)
   name         String        @db.VarChar(30)
-  phone_number Float?
+  phone_number Float         @unique
   address      String?       @db.VarChar(50)
   urlhost      String        @unique @db.VarChar(255)
-  email        String        @unique
+  email        String?
   image        String        @db.Text
   role         Account_Roles @default(Admin)
   createdAt    DateTime      @default(now())
@@ -38,11 +35,11 @@ model TbAgencyAccount {
   id           String         @id @default(uuid())
   password     String         @db.VarChar(255)
   name         String?        @db.VarChar(30)
-  phone_number Float?
+  phone_number Float          @unique
   address      String?        @db.VarChar(50)
   role         Account_Roles  @default(Agency)
   urlhost      String         @unique @db.VarChar(255)
-  email        String         @unique @db.VarChar(255)
+  email        String         
   image        String?        @db.Text
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
@@ -50,17 +47,19 @@ model TbAgencyAccount {
 
   @@index([email, password], name: "index_validation_agency_login_email_password")
   @@index([id], type: Hash, name: "index_get_Agencyid")
+  @@index([phone_number], type: Hash, name: "index_validation_agency_signup_phone_number")
+  @@index([urlhost], type: Hash, name: "index_validation_agency_signup_urlhost")
 }
 
 model TbSubAccount {
   id            String          @id @default(uuid())
   AgencyId      String
   password      String          @db.VarChar(255)
-  phone_number  Float?
+  phone_number  Float           @unique
   address       String?         @db.VarChar(50)
   name          String?         @db.VarChar(30)
   urlhost      String           @db.VarChar(255)
-  email         String          @unique
+  email         String?         
   image         String?         @db.Text
   role          Account_Roles   @default(SubAccount)
   createdAt     DateTime        @default(now())
@@ -69,7 +68,7 @@ model TbSubAccount {
 
   @@index([email, password], name: "index_validation_login_subaccount_email_password")
   @@index([id], type: Hash, name: "index_get_SubAccountId")
-  @@index([AgencyId], map: "AgencyId")
+  @@index([AgencyId], map: "rfc_AgencyId")
 }
 
 enum Account_Roles {
