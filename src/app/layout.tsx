@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="vi">
       <body className={`${roboto.variable} ${inter.variable}`}>
         <Providers>{children}</Providers>
         <Toaster position="top-center" reverseOrder={false} />
