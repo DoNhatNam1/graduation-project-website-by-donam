@@ -61,11 +61,11 @@ const LoginForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col mt-5 text-base">
         <div className="flex flex-col px-5">
-          <label htmlFor="email" className="sr-only">
-            Email
+          <label htmlFor="phone_number" className="sr-only">
+            Tài khoản
           </label>
           <input
-            {...register("phone_number")}
+            {...register("phone_number", { valueAsNumber: true })}
             type="tel"
             className="justify-center items-start p-2.5 border-b border-solid border-slate-50 text-slate-50 max-md:pr-5 bg-transparent"
             placeholder="Nhập tài khoản"
