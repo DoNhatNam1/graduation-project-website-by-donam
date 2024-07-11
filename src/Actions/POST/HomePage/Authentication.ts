@@ -9,7 +9,8 @@ import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 let path = process.env.NEXT_PUBLIC_HOSTNAME_PATH;
-let secretKey = process.env.SECRET_KEY;
+// let secretKey = process.env.SECRET_KEY;
+let secretKey = 'uRLguHs7Y6Wg0UEwX0lFQcuaFSyWHpRz';
 let key = new TextEncoder().encode(String(secretKey));
 
 export async function encrypt(payload: any) {

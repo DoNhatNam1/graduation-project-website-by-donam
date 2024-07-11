@@ -1,5 +1,4 @@
 
-import { cookies } from "next/headers"
 import Image from "next/image";
 import img_assets2F46998d0431f84955ab18b5f45141d4dc2Ff86974f23f8844d6a9f0288fef69b208 from '@/public/assets2F46998d0431f84955ab18b5f45141d4dc2Ff86974f23f8844d6a9f0288fef69b208.png';
 import img_a8edc996d6a854431c488542e3eac2d78e74caeba11585878eb9eef92d6c085b from '@/public/a8edc996d6a854431c488542e3eac2d78e74caeba11585878eb9eef92d6c085b.png';
@@ -9,8 +8,6 @@ import LoginForm from "@/src/app/(routes)/login/_components/LoginForm";
 
 export default async function LoginScreen() {
 
-  // const cookieStore = cookies()
-  // const path = cookieStore.get('agencyDomain')!.value
   return (
     <>
     <main className="flex overflow-hidden relative flex-col justify-center min-h-screen">
