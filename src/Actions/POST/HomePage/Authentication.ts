@@ -9,8 +9,7 @@ import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 let path = process.env.NEXT_PUBLIC_HOSTNAME_PATH;
-// let secretKey = process.env.SECRET_KEY;
-let secretKey = 'uRLguHs7Y6Wg0UEwX0lFQcuaFSyWHpRz';
+let secretKey = process.env.SECRET_KEY;
 let key = new TextEncoder().encode(String(secretKey));
 
 export async function encrypt(payload: any) {
@@ -94,7 +93,7 @@ export async function checkSignUpData(InputData: SignupType){
     name: 'inputData',
     value: JSON.stringify(InputData),
     httpOnly: true,
-    path: '/signup/choose-bussiness',
+    path: '/signup/choose-business',
   })
   
 }
