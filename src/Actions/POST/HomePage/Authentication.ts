@@ -8,9 +8,8 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
-let path = process.env.NEXT_PUBLIC_HOSTNAME_PATH;
-let secretKey = process.env.SECRET_KEY;
-let key = new TextEncoder().encode(String(secretKey));
+let path = "webweldingstores.vercel.app";
+let key = new TextEncoder().encode(String(process.env.SECRET_KEY));
 
 export async function encrypt(payload: any) {
   return await new SignJWT(payload)
@@ -63,7 +62,7 @@ export async function login(InputData: AccountType, splitHostName: string) {
   }
 
   if (!user || user.urlhost !== splitHostName) {
-    throw new Error("Sai thông tin đăng nhập, vui lòng thử lại!");
+    throw new Error(`${process.env.ERROR_MESS_WHEN_VALIDATE_FAIL}`);
   }
 
   const expires = new Date(Date.now() + 10 * 1000);

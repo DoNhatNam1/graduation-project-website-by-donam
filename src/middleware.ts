@@ -4,7 +4,7 @@ import { updateSession } from "./Actions/POST/HomePage/Authentication";
 
 export async function middleware(req: NextRequest) {
   const cookiePath = req.cookies.get("agencyPath")?.value;
-  const hostname = process.env.NEXT_PUBLIC_HOSTNAME_PATH;
+  const hostname = "webweldingstores.vercel.app";
   const environment = process.env.NODE_ENV;
   const path = req.nextUrl.pathname;
   const isPublicPath = path === "/login" || path === "/signup" || path === "/";
