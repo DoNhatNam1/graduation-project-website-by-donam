@@ -1,19 +1,6 @@
 
-
-import dynamic from 'next/dynamic'
-import PcSignUpPageComponent from './_components/Devices/PC/PcSignUpPageComponent';
- 
-const ResponsiveComponent = dynamic(() => import("./_components/ResponsiveComponent"), { ssr: false })
+import SignUpScreen from "@/src/screens/SignupScreen";
 
 export default async function Page() {
-
-  return (
-    <>
-    <ResponsiveComponent
-      PcSignUpPageComponent={<PcSignUpPageComponent/>}
-     />
-    </>
-  );
+  return <SignUpScreen />;
 }
-
-

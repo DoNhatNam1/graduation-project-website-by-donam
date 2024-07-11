@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins, Roboto } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers/NextUiProvider";
 import { Toaster } from "react-hot-toast";

@@ -2,7 +2,7 @@
 import { getSession, logout } from "@/src/Actions/POST/HomePage/Authentication";
 import { redirect } from "next/navigation";
 
-export  default async function page() {
+export  default async function Page() {
     const session = await getSession();
   return (
     <div>

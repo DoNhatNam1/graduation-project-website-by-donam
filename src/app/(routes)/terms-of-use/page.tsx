@@ -1,21 +1,13 @@
 
-
-import dynamic from 'next/dynamic'
-import PcTermsOfUsePageComponent from './_components/Devices/PC/PcTermsOfUsePageComponent';
- 
-const ResponsiveComponent = dynamic(() => import("./_components/ResponsiveComponent"), { ssr: false })
+import TermsOfUseScreen from "@/src/screens/TermsOfUseScreen";
 
 export default async function Page() {
 
   return (
     <>
-    <ResponsiveComponent
-      PcTermsOfUsePageComponent={<PcTermsOfUsePageComponent/>}
-     />
+     <TermsOfUseScreen />
     </>
   );
 }
 
-
-import React, { useState, useEffect, useRef } from 'react';
 

@@ -1,6 +1,10 @@
 
-export type AccountType = {
-    phone_number: number;
-    password: string;
-    role: 'Admin' | 'Agency' | 'SubAccount';
-  };
+type AccountType = {
+  phone_number: number;
+  password: string;
+  role: "Admin" | "Agency" | "SubAccount";
+};
+
+export { 
+  AccountType 
+};

@@ -1,5 +1,5 @@
 
-import WarningScreen from "./_components/WarningScreen";
+import WarningScreen from "@/src/screens/WarningScreen";
 
 export default function Page() {
   return (
