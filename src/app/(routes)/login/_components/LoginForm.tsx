@@ -83,6 +83,8 @@ const LoginForm = () => {
             type="password"
             className="justify-center items-start p-2.5 mt-7 border-b border-solid border-slate-50 text-slate-50 max-md:pr-5 bg-transparent"
             placeholder="Nhập mật khẩu"
+            name="password"
+            autoComplete="current-password"
           />
           {errors.password && (
             <span className="text-red-500">{`${errors.password.message}`}</span>
