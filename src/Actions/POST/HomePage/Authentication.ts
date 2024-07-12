@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
-let path = "webweldingstores.vercel.app";
+let path = process.env.NEXT_PUBLIC_HOSTNAME_PATH;
 let key = new TextEncoder().encode(String(process.env.SECRET_KEY));
 
 export async function encrypt(payload: any) {
@@ -68,7 +68,7 @@ export async function login(InputData: AccountType, splitHostName: string) {
   const expires = new Date(Date.now() + 10 * 1000);
   const session = await encrypt({ user, expires });
 
-  cookies().set("session", session, { expires, httpOnly: true });
+  cookies().set(`${process.env.COOKIES_SESSION_NAME}`, session, { expires, httpOnly: true });
 
   redirect(`http://${splitHostName}.${path}/dashboard`);
 }
@@ -81,15 +81,15 @@ export async function checkSignUpData(InputData: SignupType){
   });
 
   if(query){
-    throw new Error("Số điện thoại này đã có tài khoản tồn tại!");
+    throw new Error(`${process.env.ERROR_MESS_WHEN_FOUND_USER}`);
   }
 
-  if (cookies().get("inputData")) {
-    cookies().delete("inputData");
+  if (cookies().get(`${process.env.COOKIES_DATA_NAME}`)) {
+    cookies().delete(`${process.env.COOKIES_DATA_NAME}`);
   }
 
   cookies().set({
-    name: 'inputData',
+    name: `${process.env.COOKIES_DATA_NAME}`,
     value: JSON.stringify(InputData),
     httpOnly: true,
     path: '/signup/choose-business',
@@ -103,19 +103,19 @@ export async function checkSignUpData(InputData: SignupType){
 
 export async function logout() {
   // Destroy the session
-  cookies().set("session", "", { expires: new Date(0) });
+  cookies().set(`${process.env.COOKIES_SESSION_NAME}`, "", { expires: new Date(0) });
 
   redirect(`http://${path}`);
 }
 
 export async function getSession() {
-  const session = cookies().get("session")?.value;
+  const session = cookies().get(`${process.env.COOKIES_SESSION_NAME}`)?.value;
   if (!session) return null;
   return await decrypt(session);
 }
 
 export async function updateSession(request: NextRequest) {
-  const session = request.cookies.get("session")?.value;
+  const session = request.cookies.get(`${process.env.COOKIES_SESSION_NAME}`)?.value;
   if (!session) return;
 
   // Refresh the session so it doesn't expire
@@ -123,7 +123,7 @@ export async function updateSession(request: NextRequest) {
   parsed.expires = new Date(Date.now() + 10 * 1000);
   const res = NextResponse.next();
   res.cookies.set({
-    name: "session",
+    name: `${process.env.COOKIES_SESSION_NAME}`,
     value: await encrypt(parsed),
     httpOnly: true,
     expires: parsed.expires,

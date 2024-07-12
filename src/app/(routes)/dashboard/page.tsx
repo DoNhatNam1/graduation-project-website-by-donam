@@ -3,7 +3,6 @@ import { getSession, logout } from "@/src/Actions/POST/HomePage/Authentication";
 import { redirect } from "next/navigation";
 
 export  default async function Page() {
-    const session = await getSession();
   return (
     <div>
     <form
@@ -15,7 +14,6 @@ export  default async function Page() {
       >
         <button type="submit">Logout</button>
       </form>
-         <pre>{JSON.stringify(session, null, 2)}</pre>
     </div>
   )
 }
