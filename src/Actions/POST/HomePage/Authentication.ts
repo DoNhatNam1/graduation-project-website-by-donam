@@ -8,7 +8,6 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
-let path = process.env.NEXT_PUBLIC_HOSTNAME_PATH;
 let key = new TextEncoder().encode(String(process.env.SECRET_KEY));
 
 export async function encrypt(payload: any) {
@@ -61,7 +60,7 @@ export async function login(InputData: AccountType, splitHostName: string) {
       break;
   }
 
-  if (!user || user.urlhost !== splitHostName) {
+  if (user === null || user.urlhost !== splitHostName) {
     throw new Error(`${process.env.ERROR_MESS_WHEN_VALIDATE_FAIL}`);
   }
 
@@ -70,7 +69,7 @@ export async function login(InputData: AccountType, splitHostName: string) {
 
   // cookies().set(`${process.env.COOKIES_SESSION_NAME}`, session, { expires, httpOnly: true });
 
-  redirect(`http://${splitHostName}.${path}/dashboard`);
+  redirect(`http://${splitHostName}.webweldingstores.vercel.app/dashboard`);
 }
 
 export async function checkSignUpData(InputData: SignupType){
@@ -105,7 +104,7 @@ export async function logout() {
   // Destroy the session
   cookies().set(`${process.env.COOKIES_SESSION_NAME}`, "", { expires: new Date(0) });
 
-  redirect(`http://${path}`);
+  redirect(`http://webweldingstores.vercel.app`);
 }
 
 export async function getSession() {
