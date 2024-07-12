@@ -1,6 +1,6 @@
 
 import { NextResponse,  NextRequest } from "next/server";
-import { getSession, updateSession } from "./Actions/POST/HomePage/Authentication";
+// import { getSession, updateSession } from "./Actions/POST/HomePage/Authentication";
 // import { cookies } from "next/headers";
 
 export async function middleware(req: NextRequest) {
@@ -35,17 +35,11 @@ export async function middleware(req: NextRequest) {
   //     break;
   // }
 
-  return updateSession(req);
+  // return updateSession(req);
 
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: [
-    '/',
-    '/dashboard',
-    '/login',
-    '/signup',
-  ]
 }
 

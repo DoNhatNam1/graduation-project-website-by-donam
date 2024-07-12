@@ -61,7 +61,7 @@ export async function login(InputData: AccountType, splitHostName: string) {
   }
 
   if (user === null || user.urlhost !== splitHostName) {
-    throw new Error(`${process.env.ERROR_MESS_WHEN_VALIDATE_FAIL}`);
+    throw new Error('Sai thông tin đăng nhập, vui lòng thử lại!');
   }
 
   // const expires = new Date(Date.now() + 10 * 1000);
@@ -80,7 +80,7 @@ export async function checkSignUpData(InputData: SignupType){
   });
 
   if(query){
-    throw new Error(`${process.env.ERROR_MESS_WHEN_FOUND_USER}`);
+    throw new Error('Số điện thoại này đã có tài khoản tồn tại!');
   }
 
   if (cookies().get(`${process.env.COOKIES_DATA_NAME}`)) {
