@@ -65,10 +65,10 @@ export async function login(InputData: AccountType, splitHostName: string) {
     throw new Error(`${process.env.ERROR_MESS_WHEN_VALIDATE_FAIL}`);
   }
 
-  const expires = new Date(Date.now() + 10 * 1000);
-  const session = await encrypt({ user, expires });
+  // const expires = new Date(Date.now() + 10 * 1000);
+  // const session = await encrypt({ user, expires });
 
-  cookies().set(`${process.env.COOKIES_SESSION_NAME}`, session, { expires, httpOnly: true });
+  // cookies().set(`${process.env.COOKIES_SESSION_NAME}`, session, { expires, httpOnly: true });
 
   redirect(`http://${splitHostName}.${path}/dashboard`);
 }
