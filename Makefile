@@ -1,6 +1,6 @@
 .PHONY: build-dev
 build-dev: ## Build the development docker image.
-	docker compose -f docker/development/docker-compose.yml build
+	docker compose -f docker/development/docker-compose.yml build next-web
 
 .PHONY: start-dev
 start-dev: ## Start the development docker container.
