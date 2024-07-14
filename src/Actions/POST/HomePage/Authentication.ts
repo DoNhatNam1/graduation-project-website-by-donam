@@ -8,6 +8,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
+let path = process.env.NEXT_PUBLIC_HOSTNAME_PATH
 let key = new TextEncoder().encode(String(process.env.SECRET_KEY));
 
 export async function encrypt(payload: any) {
@@ -64,12 +65,12 @@ export async function login(InputData: AccountType, splitHostName: string) {
     throw new Error('Sai thông tin đăng nhập, vui lòng thử lại!');
   }
 
-  // const expires = new Date(Date.now() + 10 * 1000);
-  // const session = await encrypt({ user, expires });
+  const expires = new Date(Date.now() + 10 * 1000);
+  const session = await encrypt({ user, expires });
 
-  // cookies().set(`${process.env.COOKIES_SESSION_NAME}`, session, { expires, httpOnly: true });
+  cookies().set(`${process.env.COOKIES_SESSION_NAME}`, session, { expires, httpOnly: true });
 
-  redirect(`http://${splitHostName}.webweldingstores.vercel.app/dashboard`);
+  redirect(`http://${splitHostName}.${path}/dashboard`);
 }
 
 export async function checkSignUpData(InputData: SignupType){
@@ -104,7 +105,7 @@ export async function logout() {
   // Destroy the session
   cookies().set(`${process.env.COOKIES_SESSION_NAME}`, "", { expires: new Date(0) });
 
-  redirect(`http://webweldingstores.vercel.app`);
+  redirect(`http://${path}`);
 }
 
 export async function getSession() {

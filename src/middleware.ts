@@ -1,7 +1,7 @@
 
 import { NextResponse,  NextRequest } from "next/server";
-// import { getSession, updateSession } from "./Actions/POST/HomePage/Authentication";
-// import { cookies } from "next/headers";
+import { getSession, updateSession } from "./Actions/POST/HomePage/Authentication";
+import { cookies } from "next/headers";
 
 export async function middleware(req: NextRequest) {
   // const session = await getSession();
@@ -35,7 +35,7 @@ export async function middleware(req: NextRequest) {
   //     break;
   // }
 
-  // return updateSession(req);
+  return updateSession(req);
 
 }
 

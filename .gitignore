@@ -3,7 +3,6 @@
 # dependencies
 /node_modules
 /bun.lockb
-/package-lock.json
 /.pnp
 .pnp.js
 .yarn/install-state.gz
