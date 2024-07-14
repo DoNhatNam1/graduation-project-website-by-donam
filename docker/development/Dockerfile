@@ -11,6 +11,7 @@ RUN cd graduation-project-website-by-donam
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY prisma ./prisma ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
@@ -21,12 +22,17 @@ RUN \
 # 2. Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+RUN cd graduation-project-website-by-donam
+COPY --from=deps /app/graduation-project-website-by-donam/node_modules ./node_modules
+COPY --from=deps /app/graduation-project-website-by-donam/prisma ./prisma
 COPY . .
 # This will do the trick, use the corresponding env file for each environment.
 COPY .env.development .env
 RUN npm prisma db push
 RUN npm prisma generate
+RUN cd scripts
+RUN node insertData.js
+RUN cd ../
 RUN npm run build
 
 # 3. Production image, copy all the files and run next
