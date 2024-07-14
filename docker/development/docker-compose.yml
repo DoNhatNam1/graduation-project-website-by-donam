@@ -7,7 +7,7 @@ services:
     build:
       context: ../../
       dockerfile: docker/development/Dockerfile
-    image: next-web-development
+    image: donhatnamdocker/next-web-development:latest
     ports:
       - "3002:3000"
     networks:
