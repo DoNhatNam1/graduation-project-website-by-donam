@@ -17,11 +17,13 @@ WORKDIR /app/graduation-project-website-by-donam
 COPY package.json package-lock.json ./
 
 RUN npm ci
-COPY . .
 
-# Run Prisma commands
-RUN npx prisma db push && \
-    npx prisma generate
+COPY . .
+# Generate Prisma client
+RUN npx prisma generate
+
+# Push changes to DB
+RUN npx prisma db push
 
 RUN node insertData.js
 
@@ -54,4 +56,4 @@ COPY --from=builder /app/graduation-project-website-by-donam/node_modules/@prism
 
 EXPOSE 3000
 
-CMD npm run start-docker
+CMD ["npm", "start-docker"]

@@ -2,50 +2,32 @@ version: "3"
 services:
   next-web:
     depends_on:
-      postgres-v15:
-        condition: service_started
-      pgadmin-v4:
-        condition: service_started
+      - db
     build:
       context: ../../
       dockerfile: docker/development/Dockerfile
-    image: donhatnamdocker/next-web-development:latest
+    # image: donhatnamdocker/next-web-development:latest
     restart: unless-stopped
     ports:
-      - "3002:3000"
-    network_mode: host
+      - "3000:3000"
     environment:
-      - HOSTNAME=localhost
-      - MYSQL_PRISMA_URL='mysql://root:teste@localhost:3309/finaldb'
-      - POSTGRES_PRISMA_URL="postgresql://postgres:password@postgres-v15:5432/postgres"
-      - POSTGRES_URL_NON_POOLING="postgresql://postgres:password@postgres-v15:5432/postgres"
-  postgres-v15:
-    image: postgres:15
-    restart: unless-stopped
+      - DOCKER_POSTGRES_PRISMA_URL="postgresql://postgres:postgres@db:5432/users"
+    networks:
+      - backend-network
+  db:
+    image: postgres:14.1-alpine
+    restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRED_DB=users
+    # We don't have to expose this port because the containers communicate inside the docker network
+    #ports:
+    #  - '5432:5432'
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    network_mode: host
-  pgadmin-v4:
-    image: dpage/pgadmin4
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "teste@teste.com"
-      PGADMIN_DEFAULT_PASSWORD: "teste"
-    ports:
-      - 16543:80
-    volumes:
-      - ./servers.json:/pgadmin4/servers.json
-    network_mode: host
+
 
 volumes:
-  postgres-db-volume:
+  db:
     driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./data
