@@ -13,8 +13,7 @@ services:
     restart: unless-stopped
     ports:
       - "3002:3000"
-    networks:
-      - postgres-db-network
+    network_mode: host
     environment:
       - HOSTNAME=localhost
       - MYSQL_PRISMA_URL='mysql://root:teste@localhost:3309/finaldb'
@@ -30,8 +29,7 @@ services:
       - postgres-db-volume:/var/lib/postgresql/data
     ports:
       - 5432:5432
-    networks:
-      - postgres-db-network
+    network_mode: host
   pgadmin-v4:
     image: dpage/pgadmin4
     restart: unless-stopped
@@ -42,8 +40,7 @@ services:
       - 16543:80
     volumes:
       - ./servers.json:/pgadmin4/servers.json
-    networks:
-      - postgres-db-network
+    network_mode: host
 
 volumes:
   postgres-db-volume:
@@ -52,6 +49,3 @@ volumes:
       type: none
       o: bind
       device: ./data
-networks:
-  postgres-db-network:
-    driver: bridge
