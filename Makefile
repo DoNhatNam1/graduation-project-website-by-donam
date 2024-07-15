@@ -3,7 +3,7 @@ start-db: ## Start the database docker container.
 	docker compose -f docker/development/docker-compose.yml up -d postgres-v15 pgadmin-v4
 
 .PHONY: stop-db
-stop-dev: ## Stop the development docker container.
+stop-db: ## Stop the development docker container.
 	docker compose -f docker/development/docker-compose.yml down postgres-v15 pgadmin-v4
 
 .PHONY: start-dev
