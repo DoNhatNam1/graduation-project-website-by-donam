@@ -26,8 +26,8 @@ RUN npx prisma generate
 
 RUN npm run build
 
-COPY migrate-and-start.sh .
-RUN chmod +x migrate-and-start.sh
+# COPY migrate-and-start.sh .
+# RUN chmod +x migrate-and-start.sh
 
 ################
 #    Runner    #
@@ -51,11 +51,11 @@ COPY --from=builder /app/graduation-project-website-by-donam/package-lock.json .
 COPY --from=builder /app/graduation-project-website-by-donam/next.config.mjs ./next.config.mjs
 COPY --from=builder /app/graduation-project-website-by-donam/public ./public
 COPY --from=builder /app/graduation-project-website-by-donam/.next/standalone ./
-COPY --from=builder /app/graduation-project-website-by-donam/migrate-and-start.sh .
+# COPY --from=builder /app/graduation-project-website-by-donam/migrate-and-start.sh ./migrate-and-start.sh
 COPY --from=builder /app/graduation-project-website-by-donam/.next/static ./.next/static
 COPY --from=builder /app/graduation-project-website-by-donam/node_modules/@prisma/client ./node_modules/@prisma/client
 
 EXPOSE 3000
 ENV PORT 3000
 
-CMD ["./migrate-and-start.sh"]
+CMD  ["npm", "start-docker"]
