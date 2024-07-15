@@ -14,20 +14,20 @@ RUN git clone https://github.com/DoNhatNam1/graduation-project-website-by-donam.
 # Change working directory to the cloned repository
 WORKDIR /app/graduation-project-website-by-donam
 
-COPY package.json package-lock.json ./
+# COPY package.json package-lock.json ./
 
 RUN npm ci
 
-COPY . .
 # Generate Prisma client
+
+COPY . .
+
 RUN npx prisma generate
 
-# Push changes to DB
-RUN npx prisma db push
-
-RUN node insertData.js
-
 RUN npm run build
+
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
 
 ################
 #    Runner    #
@@ -51,9 +51,11 @@ COPY --from=builder /app/graduation-project-website-by-donam/package-lock.json .
 COPY --from=builder /app/graduation-project-website-by-donam/next.config.mjs ./next.config.mjs
 COPY --from=builder /app/graduation-project-website-by-donam/public ./public
 COPY --from=builder /app/graduation-project-website-by-donam/.next/standalone ./
+COPY --from=builder /app/graduation-project-website-by-donam/entrypoint.sh .
 COPY --from=builder /app/graduation-project-website-by-donam/.next/static ./.next/static
 COPY --from=builder /app/graduation-project-website-by-donam/node_modules/@prisma/client ./node_modules/@prisma/client
 
 EXPOSE 3000
+ENV PORT 3000
 
-CMD ["npm", "start-docker"]
+CMD ["./entrypoint.sh"]
