@@ -61,19 +61,19 @@ You can read this [Documentation](https://www.prisma.io/docs/getting-started/set
 Run on Development
 
 ```bash
-  npm run dev
+npm run dev
 ```
 
 Build on Production
 
 ```bash
-  npm run build
+npm run build
 ```
 
 Start the web
 
 ```bash
-  npm run start
+npm run start
 ```
 
  ### How to set up the project from Docker
@@ -102,28 +102,33 @@ bash setupDocker.sh
 
 ## Installation
 
+Copy the all the file and folder like this
+
+![Docker_Tree](./tree_docker.png)
+
+<a 
+href="https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FDoNhatNam1%2Fapp%2Ftree%2Fmain%2Fgraduation-project-website-by-donam" download>Download_Tree_Folder</a> and extract it to your computer
+
 Install Make in PowerShell
 
 ```bash
 choco install make
 ```
 
-Create folder graduation-project-website-by-donam
+Open Powershell from graduation-project-website-by-donam folder and run Command from Makefile to start database image
 
 ```bash
-mkdir graduation-project-website-by-donam
-cd graduation-project-website-by-donam
+make start-db
 ```
 
-Copy the all the file and folder like this
-
-![Docker_Tree](./tree_docker.png)
-
-Run Docker Command from Makefile 
+Then start the website image
 
 ```bash
 make start-dev
 ```
+
+## Get Started Now!
+You're all set! Follow the steps above to start developing with our Rental Sales Management Platform on local machine.
 
 ## Contact
 For more information about the platform, please visit our website [[WeldingStore](https://webweldingstores.vercel.app/)] or contact us at namnhatvt2003@gmail.com.

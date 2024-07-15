@@ -1,11 +1,11 @@
 # Base image setup
-FROM node:20 AS builder
+FROM node:20-alpine AS builder
 
 # Set the working directory
 WORKDIR /app
 
 # Install git
-RUN apk add --no-cache git
+RUN apk add --no-cache libc6-compat git
 
 
 # Clone the repository
@@ -14,16 +14,24 @@ RUN git clone https://github.com/DoNhatNam1/graduation-project-website-by-donam.
 # Change working directory to the cloned repository
 WORKDIR /app/graduation-project-website-by-donam
 
-COPY .env.development .env
 COPY package.json package-lock.json ./
+
 RUN npm ci
 COPY . .
+
+# Run Prisma commands
+RUN npx prisma db push && \
+    npx prisma generate
+
+RUN node insertData.js
+
 RUN npm run build
 
 ################
 #    Runner    #
 ################
 FROM node:20-alpine as runner
+
 
 WORKDIR /app/graduation-project-website-by-donam
 
@@ -42,17 +50,8 @@ COPY --from=builder /app/graduation-project-website-by-donam/next.config.mjs ./n
 COPY --from=builder /app/graduation-project-website-by-donam/public ./public
 COPY --from=builder /app/graduation-project-website-by-donam/.next/standalone ./
 COPY --from=builder /app/graduation-project-website-by-donam/.next/static ./.next/static
-COPY --from=builder /app/graduation-project-website-by-donam/prisma ./prisma
-COPY --from=builder /app/graduation-project-website-by-donam/scripts/insertData.js ./insertData.js
-COPY --from=builder /app/graduation-project-website-by-donam/entrypoint.sh ./entrypoint.sh
 COPY --from=builder /app/graduation-project-website-by-donam/node_modules/@prisma/client ./node_modules/@prisma/client
 
 EXPOSE 3000
 
-# Entrypoint script to wait for dependencies and then start the app
-USER root
-# RUN chmod +x /app/graduation-project-website-by-donam/wait-for-it.sh
-# RUN chmod +x /app/graduation-project-website-by-donam/entrypoint.sh
-# RUN chmod +x /app/graduation-project-website-by-donam/insertData.js
-
-CMD ["entrypoint.sh"]
+CMD npm run start-docker
