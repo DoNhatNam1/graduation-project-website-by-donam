@@ -2,8 +2,10 @@ version: "3"
 services:
   next-web:
     depends_on:
-      - postgres-v15
-      - pgadmin-v4
+      postgres-v15:
+        condition: service_started
+      pgadmin-v4:
+        condition: service_started
     build:
       context: ../../
       dockerfile: docker/development/Dockerfile
