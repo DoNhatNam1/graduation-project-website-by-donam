@@ -8,10 +8,16 @@ services:
       context: ../../
       dockerfile: docker/development/Dockerfile
     image: donhatnamdocker/next-web-development:latest
+    restart: unless-stopped
     ports:
       - "3002:3000"
     networks:
       - postgres-db-network
+    environment:
+      - HOSTNAME=localhost
+      - MYSQL_PRISMA_URL='mysql://root:teste@localhost:3309/finaldb'
+      - POSTGRES_PRISMA_URL="postgresql://postgres:password@postgres-v15:5432/postgres"
+      - POSTGRES_URL_NON_POOLING="postgresql://postgres:password@postgres-v15:5432/postgres"
   postgres-v15:
     image: postgres:15
     restart: unless-stopped

@@ -6,6 +6,7 @@
     "dev": "(bun prisma generate || npm prisma generate) && next dev --turbo",
     "build": "npx prisma generate && next build",
     "start": "next start",
+    "start-docker": "node server.js",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "lint": "next lint"
   },
@@ -48,14 +49,14 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "eslint-config-prettier": "^9.1.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-config-next": "14.2.3"
+    "typescript": "^5"
   }
 }
