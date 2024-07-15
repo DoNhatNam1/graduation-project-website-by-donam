@@ -1,22 +1,20 @@
-version: "3"
+version: '3.8'
 services:
-  next-web:
+  server:
     depends_on:
       - db
     build:
       context: ../../
       dockerfile: docker/development/Dockerfile
-    # image: donhatnamdocker/next-web-development:latest
+    # image: donhatnamdocker/server-development:latest
     restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
       - DOCKER_POSTGRES_PRISMA_URL="postgresql://postgres:postgres@db:5432/users"
-    networks:
-      - backend-network
   db:
     image: postgres:14.1-alpine
-    restart: always
+    restart: unless-stopped
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -25,7 +23,7 @@ services:
     #ports:
     #  - '5432:5432'
     volumes:
-      - postgres-db-volume:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
 
 
 volumes:
