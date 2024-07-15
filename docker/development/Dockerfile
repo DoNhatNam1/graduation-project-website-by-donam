@@ -1,48 +1,62 @@
+# Base image setup
 FROM node:20-alpine AS base
 
-# 1. Install dependencies only when needed
-FROM base AS builder
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat git
-RUN mkdir app && cd app/
-RUN git clone https://github.com/DoNhatNam1/graduation-project-website-by-donam.git
+# Set the working directory
+WORKDIR /app
 
-RUN cd graduation-project-website-by-donam/
+# Install git
+RUN apk add --no-cache git
 
-# Install dependencies based on the preferred package manager
-RUN npm ci
+# Clone the repository
+RUN git clone https://github.com/DoNhatNam1/graduation-project-website-by-donam.git .
 
-# Run Prisma commands
-RUN npm prisma db push
-RUN npm prisma generate
+# Copy .env file
+COPY .env .env
 
-# Run custom scripts
-RUN cd scripts/ && node insertData.js && cd ../
+################
+# Dependencies #
+################
+FROM base AS dependencies
 
-# Build the Next.js application
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+################
+#    Build     #
+################
+FROM base AS build
+
+COPY --from=dependencies /app/node_modules ./node_modules
+COPY . .
+
+# Disable Next.js telemetry
+ENV NEXT_TELEMETRY_DISABLED 1
+
 RUN npm run build
 
-# 2. Production image, copy all the files and run next
-FROM base AS runner
-WORKDIR /app/graduation-project-website-by-donam/
+# Prisma
+RUN npx prisma generate --schema=prisma/schema.prisma
 
-ENV NODE_ENV=production
+################
+#    Target    #
+################
+FROM base AS target
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+# Create necessary system user and group
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/graduation-project-website-by-donam/public ./public
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/.next/static ./.next/static
-
+# Copy necessary files from build stage
+COPY --from=build /app/public ./public
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
+COPY --from=build /app/prisma ./prisma
+COPY --from=build /app/node_modules/@prisma/client ./node_modules/@prisma/client
 
 USER nextjs
 
 EXPOSE 3000
-
 ENV PORT 3000
 
-CMD HOSTNAME=localhost node server.js
+CMD ["npm", "start"]

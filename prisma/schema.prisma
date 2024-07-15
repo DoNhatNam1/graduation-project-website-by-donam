@@ -12,6 +12,8 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
+
+
 // dotenv -e .env.local -- bunx prisma db push
 
 model TbAdmin {
