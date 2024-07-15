@@ -6,8 +6,7 @@
     "dev": "(bun prisma generate || npm prisma generate) && next dev --turbo",
     "build": "npx prisma generate && next build",
     "start": "next start",
-    "start-docker": "npm db:sync && node server.js",
-    "db:sync": "prisma db push",
+    "start-docker": "node server.js",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "lint": "next lint"
   },
