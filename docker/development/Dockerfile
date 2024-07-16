@@ -1,5 +1,5 @@
 # Base image setup
-FROM node:20-alpine AS builder
+FROM node:18-alpine AS builder
 
 # Set the working directory
 WORKDIR /app
@@ -19,11 +19,8 @@ WORKDIR /app/graduation-project-website-by-donam
 RUN npm ci
 
 # Generate Prisma client
-ENV DOCKER_POSTGRES_PRISMA_URL="postgresql://root:password@myhost:5432/users"
 
 COPY . .
-
-
 
 RUN npm run build
 
@@ -33,7 +30,7 @@ RUN npm run build
 ################
 #    Runner    #
 ################
-FROM node:20-alpine as runner
+FROM node:18-alpine as runner
 
 
 WORKDIR /app/graduation-project-website-by-donam
@@ -54,7 +51,7 @@ COPY --from=builder /app/graduation-project-website-by-donam/public ./public
 COPY --from=builder /app/graduation-project-website-by-donam/.next/standalone ./
 # COPY --from=builder /app/graduation-project-website-by-donam/migrate-and-start.sh ./migrate-and-start.sh
 COPY --from=builder /app/graduation-project-website-by-donam/.next/static ./.next/static
-COPY --from=builder /app/graduation-project-website-by-donam/node_modules/@prisma/client ./node_modules/@prisma/client
+COPY --from=builder /app/graduation-project-website-by-donam/node_modules ./node_modules
 
 EXPOSE 3000
 ENV PORT 3000
