@@ -1,12 +1,13 @@
 
 services:
   db:
-    image: postgres:14
+    image: postgres:15-alpine
+    container_name: db
     restart: unless-stopped
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=mydb
+      - POSTGRES_DB=finaldb
     ports:
       - 5432:5432
     expose:
@@ -14,17 +15,19 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
   server:
+    container_name: server
+    image: server
     depends_on:
       - db
     build:
-      context: ../../
-      dockerfile: docker/development/Dockerfile
+      context: ./
+      dockerfile: ./Dockerfile
     restart: unless-stopped
     volumes:
       - postgres-data:/app/postgres-data
     ports:
       - "3000:3000"
     environment:
-      - DOCKER_POSTGRES_PRISMA_URL=postgresql://postgres:testpass123@localhost:5432/mydb?schema=public
+      - DOCKER_POSTGRES_PRISMA_URL=postgresql://postgres:postgres@db:5432/finaldb?schema=public
 volumes:
   postgres-data:

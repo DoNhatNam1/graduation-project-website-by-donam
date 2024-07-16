@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "(bun prisma generate || npm prisma generate) && next dev --turbo",
-    "build": "npx prisma generate && npx prisma db push && next build",
+    "build": "npx prisma generate && next build",
     "start": "next start",
-    "start-docker": "node server.js",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "lint": "next lint"
   },
@@ -34,7 +33,7 @@
     "next": "14.2.3",
     "next-themes": "^0.3.0",
     "nextui-cli": "^0.3.0",
-    "prisma": "^5.14.0",
+    "prisma": "^5.16.2",
     "react": "^18",
     "react-dom": "^18",
     "react-firebase-hooks": "^5.1.1",

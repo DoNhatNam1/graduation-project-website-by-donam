@@ -1,10 +1,10 @@
 .PHONY: start-db
-start-db: ## Start the development docker container.
-	docker compose -f docker/development/docker-compose.yml up -d db
+start-db: ## Start the database docker container.
+	docker compose -f docker-compose.yml up -d db
 
-.PHONY: start-dev
-start-dev: ## Start the development docker container.
-	docker compose -f docker/development/docker-compose.yml up -d --build server
+.PHONY: start-server
+start-server: ## Start the server docker container.
+	docker compose -f docker-compose.yml up -d --build server
 
 .PHONY: stop-dev
 stop-dev: ## Stop the development docker container.
