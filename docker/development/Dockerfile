@@ -20,8 +20,6 @@ RUN npm ci
 
 # Generate Prisma client
 
-COPY . .
-
 RUN npm run build
 
 # COPY migrate-and-start.sh .

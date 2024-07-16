@@ -25,6 +25,6 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DOCKER_POSTGRES_PRISMA_URL=postgresql://postgres:testpass123@0.0.0.0:6500/mydb?schema=public
+      - DOCKER_POSTGRES_PRISMA_URL=postgresql://postgres:testpass123@localhost:6500/mydb?schema=public
 volumes:
   postgres-data:
