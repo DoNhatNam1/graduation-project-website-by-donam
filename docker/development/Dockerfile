@@ -19,10 +19,11 @@ WORKDIR /app/graduation-project-website-by-donam
 RUN npm ci
 
 # Generate Prisma client
+ENV DOCKER_POSTGRES_PRISMA_URL="postgresql://root:password@myhost:5432/users"
 
 COPY . .
 
-RUN npx prisma generate
+
 
 RUN npm run build
 

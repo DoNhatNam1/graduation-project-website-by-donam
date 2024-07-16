@@ -1,15 +1,14 @@
 version: '3.9'
 services:
   db:
-    image: postgres:14.1-alpine
+    image: postgres:15
     restart: unless-stopped
-    hostname: myhost
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=password
-      - POSTGRED_DB=users
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mydb
     ports:
-      - 5432:5432
+      - 6500:5432
     volumes:
       - postgres-data:/var/lib/postgresql/data
   server:
@@ -24,7 +23,6 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DOCKER_POSTGRES_PRISMA_URL="postgresql://root:password@myhost:5432/users"
-  
+      - DOCKER_POSTGRES_PRISMA_URL=postgresql://postgres:testpass123@localhost:6500/mydb?schema=public
 volumes:
   postgres-data:
