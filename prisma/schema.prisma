@@ -7,7 +7,7 @@ datasource db {
   // provider = "mysql"
 
   // url = env("POSTGRES_PRISMA_URL")
-  url = env("DATABASE_URL")
+  url = env("DOCKER_POSTGRES_PRISMA_URL")
   // url = env("MYSQL_PRISMA_URL")
 
   // directUrl = env("POSTGRES_URL_NON_POOLING")
