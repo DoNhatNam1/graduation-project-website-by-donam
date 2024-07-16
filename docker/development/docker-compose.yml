@@ -1,7 +1,7 @@
 
 services:
   db:
-    image: postgres:15
+    image: postgres:14
     restart: unless-stopped
     environment:
       - POSTGRES_USER=postgres
@@ -9,6 +9,8 @@ services:
       - POSTGRES_DB=mydb
     ports:
       - 6500:5432
+    expose:
+      - 6500
     volumes:
       - postgres-data:/var/lib/postgresql/data
   server:
@@ -23,6 +25,6 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DOCKER_POSTGRES_PRISMA_URL=postgresql://postgres:testpass123@localhost:6500/mydb?schema=public
+      - DOCKER_POSTGRES_PRISMA_URL=postgresql://postgres:testpass123@0.0.0.0:6500/mydb?schema=public
 volumes:
   postgres-data:
