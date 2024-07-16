@@ -104,7 +104,7 @@ bash setupDocker.sh
 
 Copy the all the file and folder like this
 
-![Docker_Tree](./tree_docker.png)
+![Docker_Tree](./trees_docker.png)
 
 <a 
 href="https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FDoNhatNam1%2Fapp%2Ftree%2Fmain%2Fgraduation-project-website-by-donam" download>Download_Tree_Folder</a> and extract it to your computer
