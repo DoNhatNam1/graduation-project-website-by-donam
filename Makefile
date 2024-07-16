@@ -2,13 +2,17 @@
 start-db: ## Start the database docker container.
 	docker compose -f docker-compose.yml up -d db
 
-.PHONY: start-server
-start-server: ## Start the server docker container.
-	docker compose -f docker-compose.yml up -d --build server
+.PHONY: start-nextjs
+start-nextjs: ## Start the server docker container.
+	docker compose -f docker-compose.yml up -d --build nextjs_c
 
-.PHONY: stop-dev
-stop-dev: ## Stop the development docker container.
-	docker compose -f docker-compose.yml down
+.PHONY: sync-db
+sync-db: ## sync the database with prisma migrate.
+	docker exec -it nextjs_c npx prisma migrate dev --name init
+
+.PHONY: pg-login
+pg-login: ## Login to local postgres.
+	docker exec -it db psql -U postgres
   
 .PHONY: build-prod
 build-prod: ## Build the production docker image.

@@ -41,7 +41,7 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
+COPY --from=builder /app/graduation-project-website-by-donam/public ./public
 
 # Set the correct permission for prerender cache
 RUN mkdir .next
@@ -53,8 +53,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-don
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/node_modules ./node_modules
-COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donamp/next.config.mjs ./next.config.mjs
-COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donamp/env ./env
+COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/next.config.mjs ./next.config.mjs
+COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/.env ./env
 
 USER nextjs
 

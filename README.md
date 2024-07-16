@@ -5,9 +5,9 @@ Welcome to the Rental Sales Management Platform repository! This project focuses
 
 ## Tech Stack
 
-**Client:** NextJs, TailwindCSS, Firebase
+**Client:** NextJs, NextUi, TailwindCSS, Firebase
 
-**Server:** NextJs, Node, Express, Stripe, Prisma
+**Server:** NextJs, NodeJs, Stripe, Prisma
 
 **Database:** Postgres
 
@@ -115,7 +115,7 @@ Install Make in PowerShell
 choco install make
 ```
 
-Open Powershell from graduation-project-website-by-donam folder and run Command from Makefile to start database image
+Open Powershell from graduation-project-website-by-donam folder and run Command from file Makefile to start database image
 
 ```bash
 make start-db
@@ -124,8 +124,31 @@ make start-db
 Then start the website image
 
 ```bash
-make start-dev
+make start-nextjs_c
 ```
+
+Next, we need to sync all the table to the pg docker database, run: 
+
+```bash
+make sync-db
+```
+
+Check the pg database, you can login to pg shell 
+
+```bash
+make pg-login
+```
+
+You can use this comment to style the psql table, only word on psql shell ( Optional )
+
+```bash
+\x auto
+\pset linestyle unicode
+\pset border 2
+```
+
+
+
 
 ## Get Started Now!
 You're all set! Follow the steps above to start developing with our Rental Sales Management Platform on local machine.
