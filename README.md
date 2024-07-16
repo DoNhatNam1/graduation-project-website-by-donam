@@ -78,7 +78,7 @@ npm run start
 
  ### How to set up the project from Docker
 
-You don't need to clone the project if you follow this setup, just setup Docker in Linux or SubLinux, follow this [Linux_On_Window](https://www.howtogeek.com/744328/how-to-install-the-windows-subsystem-for-linux-on-windows-11/) or you can watch [Youtube_Docker_Setup_On_Window](https://www.youtube.com/watch?v=rATNU0Fr8zs) or follow the below introduction:
+You don't need to clone the project if you follow this setup, just setup Docker in Linux or SubLinux, first follow this [Linux_On_Window](https://www.howtogeek.com/744328/how-to-install-the-windows-subsystem-for-linux-on-windows-11/), then go to watch [Youtube_Docker_Setup_On_Window](https://www.youtube.com/watch?v=rATNU0Fr8zs) or follow the below introduction:
 
  #### Copy file setupDocker.sh to your computer
 
