@@ -1,26 +1,22 @@
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
-# Install dependencies only when needed
-FROM base AS deps
+# Rebuild the source code only when needed
+FROM base AS builder
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat git
 WORKDIR /app
 
+RUN git clone https://github.com/DoNhatNam1/graduation-project-website-by-donam.git
+
+WORKDIR /app/graduation-project-website-by-donam
+
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
-
-
-# Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -36,7 +32,7 @@ RUN \
 
 # Production image, copy all the files and run next
 FROM base AS runner
-WORKDIR /app
+WORKDIR /app/graduation-project-website-by-donam
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
@@ -53,8 +49,12 @@ RUN chown nextjs:nodejs .next
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/prisma ./prisma
+COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donamp/next.config.mjs ./next.config.mjs
+COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donamp/env ./env
 
 USER nextjs
 
