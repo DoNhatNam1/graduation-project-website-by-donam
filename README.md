@@ -80,28 +80,6 @@ npm run start
 
 You don't need to clone the project if you follow this setup, just setup Docker in Linux or SubLinux, first follow this [Linux_On_Window](https://www.howtogeek.com/744328/how-to-install-the-windows-subsystem-for-linux-on-windows-11/), then go to watch [Youtube_Docker_Setup_On_Window](https://www.youtube.com/watch?v=rATNU0Fr8zs) or follow the below introduction:
 
- #### Copy file setupDocker.sh to your computer
-
-- Linux: Run the script as root (sudo) to install Docker on Linux.
-
-```bash
-sudo bash setupDocker.sh
-```
-
-- macOS: Run script on macOS Terminal.
-
-```bash
-bash setupDocker.sh
-```
-
-- Windows: Run script in WSL 2 environment (must be installed previously).
-
-```bash
-bash setupDocker.sh
-```
-
-## Installation
-
 Copy the all the file and folder like this
 
 ![Docker_Tree](./trees_docker.png)
@@ -109,13 +87,29 @@ Copy the all the file and folder like this
 <a 
 href="https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FDoNhatNam1%2Fapp%2Ftree%2Fmain%2Fgraduation-project-website-by-donam" download>Download_Tree_Folder</a> and extract it to your computer
 
-Install Make in PowerShell
+ #### Copy file setupDocker.sh to your computer
+
+  Run the script as root (sudo) to install Docker on Linux.
+
+```bash
+sudo bash setupDocker.sh
+```
+
+## Installation
+
+For Window, install Make in PowerShell
 
 ```bash
 choco install make
 ```
 
-Open Powershell from graduation-project-website-by-donam folder and run Command from file Makefile to start database image
+For Linux, install Make by command
+
+```bash
+sudo apt-get install make
+```
+
+Open Powershell or Shell command from graduation-project-website-by-donam folder and run Command from file Makefile to start database image
 
 ```bash
 make start-db
@@ -151,7 +145,7 @@ You can use this comment to style the psql table, only word on psql shell ( Opti
 
 
 ## Get Started Now!
-You're all set! Follow the steps above to start developing with our Rental Sales Management Platform on local machine.
+You're all set! Follow the steps above to start developing with our Rental Sales Management Platform on local machine, then go to [localhost:3000](http://localhost:3000/) to check the website process in browser.
 
 ## Contact
 For more information about the platform, please visit our website [[WeldingStore](https://webweldingstores.vercel.app/)] or contact us at namnhatvt2003@gmail.com.
