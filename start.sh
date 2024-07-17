@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Run Prisma migrations
 echo "Running Prisma migrations..."
