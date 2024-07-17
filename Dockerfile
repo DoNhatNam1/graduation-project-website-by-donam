@@ -55,8 +55,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-don
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/node_modules/@prisma/client ./node_modules/@prisma/client
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/node_modules/.prisma/client ./node_modules/.prisma/client
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/next.config.mjs ./next.config.mjs
-COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/.env ./env
-COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/start.sh ./start.sh
+
+USER root
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 USER nextjs
 
@@ -64,8 +66,7 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-ENV HOSTNAME="0.0.0.0"
-
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD ["/app/graduation-project-website-by-donam/start.sh"]
+
+ENTRYPOINT "/start.sh"
