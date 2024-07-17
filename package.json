@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "(bun prisma generate || npm prisma generate) && next dev --turbo",
-    "build": "npx prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "lint": "next lint"
