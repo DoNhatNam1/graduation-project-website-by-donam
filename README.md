@@ -112,7 +112,13 @@ sudo apt-get install make
 Open Powershell or Shell command from graduation-project-website-by-donam folder and run Command from file Makefile to start database image
 
 ```bash
-make start-full
+make start-db
+```
+
+Then start the website image
+
+```bash
+make start-nextjs_c
 ```
 
 Next, we need to sync all the table to the pg docker database, run: 
