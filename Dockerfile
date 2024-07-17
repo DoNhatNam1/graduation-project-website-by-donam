@@ -52,7 +52,8 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/prisma ./prisma
-COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/node_modules/@prisma/client ./node_modules/@prisma/client
+COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/node_modules/.prisma/client ./node_modules/.prisma/client
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/next.config.mjs ./next.config.mjs
 COPY --from=builder --chown=nextjs:nodejs /app/graduation-project-website-by-donam/.env ./env
 
