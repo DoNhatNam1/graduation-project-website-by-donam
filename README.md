@@ -89,42 +89,30 @@ href="https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FDo
 
  #### Copy file setupDocker.sh to your computer
 
-- Linux: Run the script as root (sudo) to install Docker on Linux.
+  Run the script as root (sudo) to install Docker on Linux.
 
 ```bash
 sudo bash setupDocker.sh
 ```
 
-- macOS: Run script on macOS Terminal.
-
-```bash
-bash setupDocker.sh
-```
-
-- Windows: Run script in WSL 2 environment (must be installed previously).
-
-```bash
-bash setupDocker.sh
-```
-
 ## Installation
 
-Install Make in PowerShell
+For Window, install Make in PowerShell
 
 ```bash
 choco install make
 ```
 
-Open Powershell from graduation-project-website-by-donam folder and run Command from file Makefile to start database image
+For Linux, install Make by command
 
 ```bash
-make start-db
+sudo apt-get install make
 ```
 
-Then start the website image
+Open Powershell or Shell command from graduation-project-website-by-donam folder and run Command from file Makefile to start database image
 
 ```bash
-make start-nextjs_c
+make start-full
 ```
 
 Next, we need to sync all the table to the pg docker database, run: 
@@ -151,7 +139,7 @@ You can use this comment to style the psql table, only word on psql shell ( Opti
 
 
 ## Get Started Now!
-You're all set! Follow the steps above to start developing with our Rental Sales Management Platform on local machine.
+You're all set! Follow the steps above to start developing with our Rental Sales Management Platform on local machine, then go to [localhost:3000](http://localhost:3000/) to check the website process in browser.
 
 ## Contact
 For more information about the platform, please visit our website [[WeldingStore](https://webweldingstores.vercel.app/)] or contact us at namnhatvt2003@gmail.com.
