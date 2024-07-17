@@ -1,4 +1,7 @@
 #!/bin/bash
+cd app
+
+cd graduation-project-website-by-donam
 
 node server.js &
 
