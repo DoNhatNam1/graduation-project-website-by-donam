@@ -80,6 +80,13 @@ npm run start
 
 You don't need to clone the project if you follow this setup, just setup Docker in Linux or SubLinux, first follow this [Linux_On_Window](https://www.howtogeek.com/744328/how-to-install-the-windows-subsystem-for-linux-on-windows-11/), then go to watch [Youtube_Docker_Setup_On_Window](https://www.youtube.com/watch?v=rATNU0Fr8zs) or follow the below introduction:
 
+Copy the all the file and folder like this
+
+![Docker_Tree](./trees_docker.png)
+
+<a 
+href="https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FDoNhatNam1%2Fapp%2Ftree%2Fmain%2Fgraduation-project-website-by-donam" download>Download_Tree_Folder</a> and extract it to your computer
+
  #### Copy file setupDocker.sh to your computer
 
 - Linux: Run the script as root (sudo) to install Docker on Linux.
@@ -101,13 +108,6 @@ bash setupDocker.sh
 ```
 
 ## Installation
-
-Copy the all the file and folder like this
-
-![Docker_Tree](./trees_docker.png)
-
-<a 
-href="https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FDoNhatNam1%2Fapp%2Ftree%2Fmain%2Fgraduation-project-website-by-donam" download>Download_Tree_Folder</a> and extract it to your computer
 
 Install Make in PowerShell
 
