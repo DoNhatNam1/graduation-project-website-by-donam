@@ -16,4 +16,9 @@ pg-login: ## Login to local postgres.
 
 .PHONY: start-full
 start-full: ## Start the web and database container at the same time.
-	docker compose -f docker-compose.yml up -d
+    docker compose -f docker-compose.yml up -d db
+    @echo "Waiting for db to be ready..."
+    @while ! docker exec -i db psql -U postgres -c "SELECT 1;" > /dev/null 2>&1; do \
+        sleep 1; \
+    done
+    docker compose -f docker-compose.yml up -d nextjs_c
