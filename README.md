@@ -115,7 +115,7 @@ Install Make in PowerShell
 choco install make
 ```
 
-Open Powershell from graduation-project-website-by-donam folder and run Command from file Makefile to start database image
+Open Powershell or Shell command from graduation-project-website-by-donam folder and run Command from file Makefile to start database image
 
 ```bash
 make start-db
