@@ -16,7 +16,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
   nextjs_c:
     container_name: nextjs_c
-    image: nextjs_img:14.2.3
+    image: donhatnamdocker/nextjs_img:v1.0
     depends_on:
       - db
     build:
