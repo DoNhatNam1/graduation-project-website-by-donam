@@ -2,22 +2,24 @@
 start-db: ## Start the database docker container.
 	docker compose -f docker-compose.yml up -d db
 
-.PHONY: start-server
-start-server: ## Start the server docker container.
-	docker compose -f docker-compose.yml up -d --build server
+.PHONY: build-nextjs
+build-nextjs: ## Build the server docker container.
+	docker compose -f docker-compose.yml build -d nextjs_c 
+	
+.PHONY: start-nextjs
+start-nextjs: ## Start the server docker container.
+	docker compose -f docker-compose.yml up -d nextjs_c 
 
-.PHONY: stop-dev
-stop-dev: ## Stop the development docker container.
-	docker compose -f docker/development/docker-compose.yml down
-  
-.PHONY: build-prod
-build-prod: ## Build the production docker image.
-	docker compose -f docker/production/docker-compose.yml build
+.PHONY: start-full
+start-full: ## Start the full docker container.
+	docker compose -f docker-compose.yml up -d
 
-.PHONY: start-prod
-start-prod: ## Start the production docker container.
-	docker compose -f docker/production/docker-compose.yml up -d
+.PHONY: pg-login
+pg-login: ## Login to local postgres.
+	docker exec -it db psql -U postgres
 
-.PHONY: stop-prod
-stop-prod: ## Stop the production docker container.
-	docker compose -f docker/production/docker-compose.yml down
+.PHONY: rm-b-cache
+rm-b-cache: ## Login to local postgres.
+	docker buildx prune -f
+
+	
