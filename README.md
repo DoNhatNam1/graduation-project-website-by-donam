@@ -87,6 +87,12 @@ Copy the all the file and folder like this
 <a 
 href="https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FDoNhatNam1%2Fapp%2Ftree%2Fmain%2Fgraduation-project-website-by-donam" download>Download_Tree_Folder</a> and extract it to your computer
 
+  Or, for deploy pospose on Ubuntu
+
+```bash
+git clone https://github.com/DoNhatNam1/app.git
+```
+
  #### Copy file setupDocker.sh to your computer
 
   Run the script as root (sudo) to install Docker on Linux.
