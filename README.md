@@ -136,7 +136,7 @@ You can use this comment to style the psql table, only word on psql shell ( Opti
 You're all set! Follow the steps above to start developing with our Rental Sales Management Platform on local machine, then go to [localhost:3000](http://localhost:3000/) to check the website process in browser.
 
 ## Contact
-For more information about the platform, please visit our website [[WeldingStore](https://webweldingstores.vercel.app/)] or contact us at namnhatvt2003@gmail.com.
+For more information about the platform, please visit our website [WeldingStore](https://webweldingstores.vercel.app/) or contact us at namnhatvt2003@gmail.com.
 
 ## License
 
