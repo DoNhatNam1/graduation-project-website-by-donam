@@ -87,6 +87,12 @@ Copy the all the file and folder like this
 <a 
 href="https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FDoNhatNam1%2Fapp%2Ftree%2Fmain%2Fgraduation-project-website-by-donam" download>Download_Tree_Folder</a> and extract it to your computer
 
+  Or, for deploy pospose on Ubuntu
+
+```bash
+git clone https://github.com/DoNhatNam1/app.git
+```
+
  #### Copy file setupDocker.sh to your computer
 
   Run the script as root (sudo) to install Docker on Linux.
@@ -136,7 +142,7 @@ You can use this comment to style the psql table, only word on psql shell ( Opti
 You're all set! Follow the steps above to start developing with our Rental Sales Management Platform on local machine, then go to [localhost:3000](http://localhost:3000/) to check the website process in browser.
 
 ## Contact
-For more information about the platform, please visit our website [[WeldingStore](https://webweldingstores.vercel.app/)] or contact us at namnhatvt2003@gmail.com.
+For more information about the platform, please visit our website [WeldingStore](https://webweldingstores.vercel.app/) or contact us at namnhatvt2003@gmail.com.
 
 ## License
 
