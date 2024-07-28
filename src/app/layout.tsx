@@ -15,6 +15,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   title: "Welding Store",
   description: "Welding Store website",
+  
 };
 
 export default function RootLayout({

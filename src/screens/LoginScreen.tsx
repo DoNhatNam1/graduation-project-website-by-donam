@@ -14,9 +14,11 @@ export default async function LoginScreen() {
       <Image
         src={img_assets2F46998d0431f84955ab18b5f45141d4dc2Ff86974f23f8844d6a9f0288fef69b208}
         alt=""
-        layout="fill"
-        objectFit="cover"
-        className="absolute inset-0"
+        fill
+        width={0}
+        height={0}
+        sizes='100vw'
+        className="absolute inset-0 object-cover"
       />
       <section className="flex relative justify-center items-center px-16 py-16 w-full max-md:px-5 max-md:max-w-full">
         <div className="flex flex-col max-w-full w-[420px]">

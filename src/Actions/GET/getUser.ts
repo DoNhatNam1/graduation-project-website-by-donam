@@ -1,4 +1,5 @@
-import prisma from '../../libs/prismaDb'
+
+import prisma from "@/src/libs/prismaDb";
 
 // Define action to fetch all user data
 const getUserData = async () => {
