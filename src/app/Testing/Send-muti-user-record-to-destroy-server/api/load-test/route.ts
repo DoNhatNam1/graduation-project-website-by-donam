@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export default async function GET() {
+export async function GET() {
   const numRequests = 1000000000; // Số lượng request cần gửi
   const requests = [];
 
