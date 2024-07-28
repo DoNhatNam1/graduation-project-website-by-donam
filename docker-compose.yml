@@ -21,7 +21,7 @@ services:
       retries: 5
   nextjs_c:
     container_name: nextjs_c
-    image: donhatnamdocker/nextjs_img:v2.0
+    # image: donhatnamdocker/nextjs_img:v2.0
     depends_on:
       db:
         condition: service_healthy
@@ -35,10 +35,25 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - DOCKER_POSTGRES_PRISMA_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?schema=public
+      - DOCKER_POSTGRES_PRISMA_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:5432/${DB_NAME}?schema=public
+      - COOKIES_SESSION_NAME=${COOKIES_SESSION_NAME}
+      - COOKIES_DATA_NAME=${COOKIES_DATA_NAME}
+      - SECRET_KEY=${SECRET_KEY}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - NEXT_AUTH_SECRET=${NEXT_AUTH_SECRET}
+      - KEY_REGISTER_EMAIL=${KEY_REGISTER_EMAIL}
+      - NEXT_PUBLIC_HOSTNAME_PATH=${NEXT_PUBLIC_HOSTNAME_PATH}
+      - NEXT_PUBLIC_FIREBASE_API_KEY=${NEXT_PUBLIC_FIREBASE_API_KEY}
+      - NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}
+      - NEXT_PUBLIC_FIREBASE_PROJECT_ID=${NEXT_PUBLIC_FIREBASE_PROJECT_ID}
+      - NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}
+      - NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}
+      - NEXT_PUBLIC_FIREBASE_APP_ID=${NEXT_PUBLIC_FIREBASE_APP_ID}
+      - NEXT_PUBLIC_FIREBASE_MESUREMENT_ID=${NEXT_PUBLIC_FIREBASE_MESUREMENT_ID}
     command: /bin/sh -c "start.sh"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      test: ["CMD", "curl", "-f", "http://${NEXT_PUBLIC_HOSTNAME_PATH}/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3

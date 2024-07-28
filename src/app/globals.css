@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .BlogStyles .BlogLayer h1 {
+        @apply text-4xl font-bold;
+    }
+
+    .BlogStyles .BlogLayer h2 {
+        @apply text-3xl font-semibold;
+    }
+
+    .BlogStyles .BlogLayer h3 {
+        @apply text-2xl font-medium;
+    }
+
+    .BlogStyles .BlogLayer h4 {
+        @apply text-xl font-medium;
+    }
+
+    .BlogStyles .BlogLayer h5 {
+        @apply text-lg font-medium;
+    }
+
+    .BlogStyles .BlogLayer h6 {
+        @apply text-base font-medium;
+    }
+
+    .BlogStyles .BlogLayer p {
+        @apply text-base;
+    }
+
+    .BlogStyles .BlogLayer img {
+        @apply max-w-full h-auto;
+    }
+
+    .BlogStyles .BlogLayer p strong {
+        @apply max-w-full h-auto;
+    }
+}

@@ -21,7 +21,7 @@ import {
   signInWithPhoneNumber,
 } from "firebase/auth";
 import toast from "react-hot-toast";
-import { app } from "@/src/libs/Firebase/firebase-v2.config";
+import { app } from "@/src/libs/Firebase/firebase.config";
 import { checkSignUpData } from "@/src/Actions/POST/HomePage/Authentication";
 import { useRouter } from "next/navigation";
 import countries from '@/src/Json/Countries.json'

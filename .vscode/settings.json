@@ -1,0 +1,6 @@
+{
+    "css.customData": [
+        ".vscode/tailwind.json"
+    ],
+    "vscode-makefile-term.commandTemplate": "make %!target!%"
+}

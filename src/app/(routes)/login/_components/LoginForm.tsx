@@ -32,6 +32,7 @@ const LoginForm = () => {
   };
 
   const onSubmit = async (data: LoginSchema) => {
+    debugger
     if (!rememberPassword) {
       toast.error("Vui lòng xác nhận lại thông tin!");
       return;
