@@ -115,6 +115,36 @@ For Linux, install Make by command
 sudo apt-get install make
 ```
 
+Setup your own .env file (Only when the .env file is set up correctly will the website work, so try hard at this step.)
+
+```bash
+#  .env
+
+DB_HOST=?
+DB_USER=?
+DB_PASSWORD=?
+DB_NAME=?
+VOLUME_NAME=?
+
+COOKIES_SESSION_NAME=?
+COOKIES_DATA_NAME=?
+SECRET_KEY="secret"
+GOOGLE_CLIENT_ID=?
+GOOGLE_CLIENT_SECRET=?
+NEXT_AUTH_SECRET=?
+KEY_REGISTER_EMAIL=?
+NEXT_PUBLIC_HOSTNAME_PATH="localhost:3000"
+
+
+NEXT_PUBLIC_FIREBASE_API_KEY=?
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=?
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=?
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=?
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=?
+NEXT_PUBLIC_FIREBASE_APP_ID=?
+NEXT_PUBLIC_FIREBASE_MESUREMENT_ID=?
+```
+
 Open Powershell or Shell command from graduation-project-website-by-donam folder and run Command from file Makefile to start the projects image
 
 ```bash
