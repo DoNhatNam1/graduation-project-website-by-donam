@@ -7,7 +7,7 @@ export default async function GET() {
   // Tạo một mảng các promise của các request
   for (let i = 0; i < numRequests; i++) {
     requests.push(
-      fetch('/api/dummy-endpoint', {
+      fetch('/Testing/Send-muti-user-record-to-destroy-server/api/dummy-endpoint', {
         method: 'GET', // Phương thức GET
         headers: {
           'Content-Type': 'application/json',
