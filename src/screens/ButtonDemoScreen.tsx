@@ -10,7 +10,7 @@ const LoadTestPage = () => {
     setLoading(true);
     try {
       // Gửi yêu cầu load test tới endpoint /api/load-test
-      const response = await fetch("/api/load-test", {
+      const response = await fetch("/Testing/Send-muti-user-record-to-destroy-server/api/load-test", {
         headers: {
             Accept: "application/json",
             method: "GET"
