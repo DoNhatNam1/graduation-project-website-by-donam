@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const numRequests = 1000000000; // Số lượng request cần gửi
+  const numRequests = 10; // Số lượng request cần gửi
   const requests = [];
 
   // Tạo một mảng các promise của các request
